@@ -1,5 +1,6 @@
 package com.nj.framework.service
 
+import androidx.annotation.StringRes
 import androidx.viewbinding.ViewBinding
 
 /**
@@ -11,7 +12,9 @@ interface IActivityService {
 
     fun viewBinding(): ViewBinding
 
-    fun showLoading(loadingMessage: String?)
+    fun showLoading(loadingMessage: String? = null)
+
+    fun showLoading(@StringRes resId: Int)
 
     fun hideLoading()
 
