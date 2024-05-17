@@ -1,6 +1,7 @@
 package com.nj.framework.ktx
 
 import android.app.Activity
+import android.net.Uri
 import android.os.Bundle
 import android.os.CancellationSignal
 import android.os.ParcelFileDescriptor
@@ -19,15 +20,24 @@ fun printDocument(
     documentPath: String?,
     errorBlock: (String?) -> Unit
 ) {
-    if (documentName.isNullOrEmpty() || documentPath.isNullOrEmpty()) {
-        errorBlock.invoke("Document name or file URI must not be null or blank.")
-        return
+    if (documentPath.isNullOrEmpty()) {
+        return errorBlock.invoke("File path must not be null or blank.")
+    }
+    val documentUri = Uri.parse(documentPath) ?: return errorBlock.invoke("")
+    printDocument(activity, documentName, documentUri, errorBlock)
+}
+
+fun printDocument(
+    activity: Activity,
+    documentName: String?,
+    documentUri: Uri?,
+    errorBlock: (String?) -> Unit
+) {
+    if (documentName.isNullOrEmpty() || documentUri == null) {
+        return errorBlock.invoke("Document name or file URI must not be null or blank.")
     }
     val printManager = activity.getSystemService<PrintManager>()
-    if (printManager == null) {
-        errorBlock.invoke("PrintManager is not available.")
-        return
-    }
+        ?: return errorBlock.invoke("PrintManager is not available.")
     val printAdapter = object : PrintDocumentAdapter() {
         override fun onWrite(
             pages: Array<out PageRange>?,
@@ -35,8 +45,10 @@ fun printDocument(
             cancellationSignal: CancellationSignal?,
             callback: WriteResultCallback?
         ) {
+            val fileDescriptor = activity.contentResolver.openFileDescriptor(documentUri, "r")
+                ?: return errorBlock.invoke("Unable to open file descriptor for the document.")
+            val inputStream = FileInputStream(fileDescriptor.fileDescriptor)
             try {
-                val inputStream = FileInputStream(documentPath)
                 val outputStream = FileOutputStream(destination?.fileDescriptor)
                 inputStream.use { input ->
                     outputStream.use { fileOut ->
@@ -47,6 +59,8 @@ fun printDocument(
             } catch (e: Exception) {
                 e.printStackTrace()
                 errorBlock.invoke("Error occurred while writing document to print destination: ${e.message}")
+            } finally {
+                fileDescriptor.close()
             }
         }
 
