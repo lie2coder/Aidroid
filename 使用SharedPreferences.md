@@ -30,12 +30,10 @@ class MyApplication : Application() {
 }
 读写 SharedPreferences
 // 写入
-com.nj.framework.global.writeSharedPreferences {
-    putString("username", "JohnDoe")
-}
+writeSharedPreferences { putString("username", "JohnDoe") }
 
 // 读取
-val username: String? = com.nj.framework.global.readSharedPreferences<String>("username")
+val username: String? = readSharedPreferences<String>("username")
 ````
 ## 注意事项
 - 确保在 AndroidManifest.xml 中声明并配置了您的自定义应用程序类。
