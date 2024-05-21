@@ -124,13 +124,12 @@ val exists = ActivityManager.isActivityExistsInTask(MyActivity::class.java)
 ```
 
 ## 注意事项
+
 - 确保在 Activity 的生命周期事件中正确调用 push 和 pop 方法，以维护 Activity 栈的状态。
 - 该管理器仅为辅助工具，实际的 Activity 生命周期管理仍需遵循 Android 的官方指南。
-## 版本历史
-v1.0.0
-- 初始版本，提供了 Activity 管理的一系列方法。
-## 贡献
-欢迎提交 issue 和 pull request 来改进此库。
 
-## 许可证
-本项目采用 MIT License。
+## 版本历史
+
+v1.0.0
+
+- 初始版本，提供了 Activity 管理的一系列方法。

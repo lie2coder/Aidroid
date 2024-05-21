@@ -46,11 +46,3 @@ myButton.onClick(wait = 200) {
 v1.0.0
 
 - 初始版本，提供长按和点击事件的扩展函数。
-
-## 贡献
-
-欢迎提交 issue 和 pull request 来改进此库。
-
-## 许可证
-
-本项目采用 MIT License。

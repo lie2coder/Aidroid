@@ -81,11 +81,3 @@ imageView.loadCircularBorder(
 v1.0.0
 
 - 初始版本，提供了加载图片、圆形图片、圆角图片和带边框圆形图片的扩展函数。
-
-## 贡献
-
-欢迎提交 issue 和 pull request 来改进此库。
-
-## 许可证
-
-本项目采用 MIT License。

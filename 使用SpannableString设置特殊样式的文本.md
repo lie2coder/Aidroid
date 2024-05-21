@@ -2,29 +2,37 @@
 
 ## 简介
 
-`com.nj.framework.ktx` 包提供了一组 Kotlin 扩展函数，旨在简化 Android 开发中对 `TextView` 和 `CharSequence` 的样式操作。
+`com.nj.framework.ktx` 包提供了一组 Kotlin 扩展函数，旨在简化 Android 开发中对 `TextView`
+和 `CharSequence` 的样式操作。
 
 ## 功能列表
 
 ### 相对大小设置
+
 - `relativeSizeSpan`: 设置文本的相对大小。
 
 ### 绝对大小设置
+
 - `absoluteSizeSpan`: 设置文本的绝对大小（像素单位）。
 
 ### 文本颜色设置
+
 - `foregroundColorSpan`: 更改文本的前景色。
 
 ### 文本背景色设置
+
 - `backgroundColorSpan`: 更改文本的背景色。
 
 ### 删除线样式
+
 - `strikethroughSpan`: 为文本添加删除线。
 
 ### 可点击样式
+
 - `clickableSpan`: 创建可点击文本，并定义点击动作。
 
 ### 文本样式设置
+
 - `styleSpan`: 设置文本样式，如加粗或斜体。
 
 ## 使用方法
@@ -63,14 +71,14 @@ textView.clickableSpan(
     }
 )
 ```
+
 ## 注意事项
+
 - 确保 range 参数在文本字符串的有效索引范围内。
 - 使用 clickableSpan 时，需要设置 LinkMovementMethod 以支持点击事件。
-## 版本历史
-v1.0.0
-- 初始版本发布，包含基本文本样式设置的扩展函数。
-## 贡献
-欢迎通过提交 issue 或 pull request 参与贡献。
 
-## 许可证
-本项目采用 MIT License。
+## 版本历史
+
+v1.0.0
+
+- 初始版本发布，包含基本文本样式设置的扩展函数。

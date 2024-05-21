@@ -31,11 +31,3 @@ val pixelsInt: Int = dpFloat.dp2pxInt()
 v1.0.0
 
 - 初始版本，提供了 .dp2px() 和 .dp2pxInt() 扩展函数。
-
-## 贡献
-
-欢迎提交 issue 和 pull request 来改进此库。
-
-## 许可证
-
-本项目采用 MIT License。

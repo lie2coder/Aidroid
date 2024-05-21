@@ -3,6 +3,8 @@ package com.nj.aidroid
 import android.os.Bundle
 import com.nj.aidroid.databinding.ActivityViewBindingDemoBinding
 import com.nj.framework.basic.BaseActivity
+import com.nj.framework.ktx.onClick
+import com.nj.framework.ktx.radius
 
 /**
  * Author: liecoder
@@ -14,7 +16,7 @@ class ViewBindingDemoActivity : BaseActivity<ActivityViewBindingDemoBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding.tvHelloWorld.text = "Hello Aidroid!"
+        mBinding.tvHelloWorld.radius(leftTopRadius = 8, rightBottomRadius = 8)
     }
 
 }

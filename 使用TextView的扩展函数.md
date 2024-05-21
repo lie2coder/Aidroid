@@ -68,11 +68,3 @@ textView.Bold()
 v1.0.0
 
 - 初始版本发布，包含 TextView 文本样式设置的扩展函数。
-
-## 贡献
-
-- 欢迎通过提交 issue 或 pull request 参与贡献。
-
-## 许可证
-
-本项目采用 MIT License。

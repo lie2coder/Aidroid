@@ -30,20 +30,19 @@ class MyApplication : Application() {
 }
 读写 SharedPreferences
 // 写入
-writeSharedPreferences { putString("username", "JohnDoe") }
+        writeSharedPreferences { putString("username", "JohnDoe") }
 
 // 读取
 val username: String? = readSharedPreferences<String>("username")
 ````
+
 ## 注意事项
+
 - 确保在 AndroidManifest.xml 中声明并配置了您的自定义应用程序类。
 - lateinit 变量 application 必须在使用应用程序的任何其他部分之前初始化。
 
 ## 版本历史
-v1.0.0
-- 初始版本，提供了全局实例和读写SharedPreferences辅助函数。
-## 贡献
-欢迎提交 issue 和 pull request 来改进此库。
 
-## 许可证
-本项目采用 MIT License。
+v1.0.0
+
+- 初始版本，提供了全局实例和读写SharedPreferences辅助函数。
