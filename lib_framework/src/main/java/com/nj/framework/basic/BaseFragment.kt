@@ -1,11 +1,15 @@
 package com.nj.framework.basic
 
-import android.graphics.Color
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
@@ -13,40 +17,45 @@ import androidx.viewbinding.ViewBinding
 import com.nj.framework.global.saveAs
 import com.nj.framework.global.saveAsUnchecked
 import com.nj.framework.loading.LoadingDialog
-import com.nj.framework.manager.PermissionManager
 import com.nj.framework.service.IBasicService
-import com.nj.framework.utils.StatusBarUtil
 import java.lang.ref.WeakReference
 import java.lang.reflect.ParameterizedType
 
 /**
  * Author: liecoder
- * Date: 2024/5/14 周二
+ * Date: 2024/5/24 周五
  * Version: 1.0
  */
-abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(),
-    IBasicService {
+abstract class BaseFragment<VB : ViewBinding> : DialogFragment(), IBasicService {
 
-    protected val mBinding: VB by lazy { viewBinding() }
-    protected val mContext: AppCompatActivity by lazy { this }
-    protected val mWeakReference: WeakReference<AppCompatActivity> by lazy { WeakReference(mContext) }
+    protected lateinit var mBinding: VB
+    protected lateinit var mContext: FragmentActivity
+    protected val mWeakReference: WeakReference<FragmentActivity> by lazy { WeakReference(mContext) }
     protected val TAG: String by lazy { this.javaClass.simpleName }
     private val loadingDialog: LoadingDialog by lazy { LoadingDialog(mContext) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(mBinding.root)
-        initialization()
-        setupLiveDataObservers()
-        setupViewObservers()
-        loadData()
-        setupStatusBar()
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
         lifecycle.addObserver(LifecycleEventObserver { _: LifecycleOwner?, event: Lifecycle.Event ->
             Log.e(TAG, "$event")
         })
     }
 
-    final override fun viewBinding(): VB {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        mBinding = viewBinding()
+        mContext = requireActivity()
+        initialization()
+        setupLiveDataObservers()
+        setupViewObservers()
+        loadData()
+        return mBinding.root
+    }
+
+    override fun viewBinding(): VB {
         try {
             val type = javaClass.genericSuperclass
             val bindingClass: Class<VB> =
@@ -71,12 +80,8 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(),
     override fun loadData() {
     }
 
-    open fun setupStatusBar() {
-        StatusBarUtil.setStatusBar(this, true, Color.WHITE, false)
-    }
-
     final override fun showLoading(loadingMessage: String?) {
-        if (isFinishing) {
+        if (mContext.isFinishing) {
             return
         }
         if (loadingDialog.isShowing) {
@@ -86,7 +91,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(),
     }
 
     final override fun showLoading(@StringRes resId: Int) {
-        if (isFinishing) {
+        if (mContext.isFinishing) {
             return
         }
         if (loadingDialog.isShowing) {
@@ -96,7 +101,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(),
     }
 
     final override fun hideLoading() {
-        if (isFinishing) {
+        if (mContext.isFinishing) {
             return
         }
         if (loadingDialog.isShowing) {
@@ -104,16 +109,5 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(),
         }
     }
 
-    /**
-     * 处理权限请求结果
-     */
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        PermissionManager.onRequestPermissionsResult(this, requestCode, permissions, grantResults)
-    }
 
 }

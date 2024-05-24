@@ -8,11 +8,19 @@ import androidx.viewbinding.ViewBinding
  * Date: 2024/5/14 周二
  * Version: 1.0
  */
-interface IActivityService {
+interface IBasicService {
 
     fun viewBinding(): ViewBinding
 
-    fun showLoading(loadingMessage: String? = null)
+    fun initialization()
+
+    fun setupLiveDataObservers()
+
+    fun setupViewObservers()
+
+    fun loadData()
+
+    fun showLoading(loadingMessage: String? = "加载中")
 
     fun showLoading(@StringRes resId: Int)
 

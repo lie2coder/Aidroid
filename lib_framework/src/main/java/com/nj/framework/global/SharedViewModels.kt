@@ -1,4 +1,4 @@
-package com.nj.framework.ktx
+package com.nj.framework.global
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver

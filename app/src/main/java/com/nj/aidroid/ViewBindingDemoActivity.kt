@@ -17,6 +17,7 @@ class ViewBindingDemoActivity : BaseActivity<ActivityViewBindingDemoBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding.tvHelloWorld.radius(leftTopRadius = 8, rightBottomRadius = 8)
+        mBinding.tvHelloWorld.filters
     }
 
 }

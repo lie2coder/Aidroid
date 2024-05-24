@@ -4,7 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.nj.framework.ktx.saveAs
+import com.nj.framework.global.saveAs
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 

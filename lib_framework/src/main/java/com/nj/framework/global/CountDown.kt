@@ -1,4 +1,4 @@
-package com.nj.framework.ktx
+package com.nj.framework.global
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

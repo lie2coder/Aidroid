@@ -4,7 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/tvHelloWorld"
             android:layout_width="@dimen/dp222"
             android:layout_height="@dimen/dp55"
